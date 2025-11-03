@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Cửu Chương</title>
+    <style>
+        /* CSS để tạo giao diện bảng cửu chương */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        /* Bảng chính chứa tất cả các cửu chương */
+        #multiplication-table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        /* Ô (cell) trong bảng */
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.1em;
+            width: calc(100% / 8); /* Chia đều cho 8 cột */
+        }
+
+        /* Tăng cường hiển thị cho hàng đầu tiên (mục đích hiển thị rõ hơn) */
+        tr:first-child td {
+            font-weight: bold;
+            background-color: #e9ecef;
+        }
+
+        /* Tô màu xen kẽ hàng (nếu muốn) */
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Bảng Cửu Chương (2x... đến 9x...)</h1>
+
+<table id="multiplication-table">
+</table>
+
+<script>
+    // --- JavaScript để tạo bảng cửu chương ---
+
+    const table = document.getElementById('multiplication-table');
+    const rows = 9; // Nhân từ 1 đến 9 (ví dụ: 2x1... 2x9)
+    const start_multiplier = 2; // Cửu chương bắt đầu từ 2
+    const end_multiplier = 9;   // Cửu chương kết thúc ở 9
+
+    // Lặp qua các hàng (từ x1 đến x9)
+    for (let i = 1; i <= rows; i++) {
+        const row = table.insertRow(); // Tạo một hàng mới (tr)
+
+        // Lặp qua các cột (từ 2 đến 9)
+        for (let j = start_multiplier; j <= end_multiplier; j++) {
+            const cell = row.insertCell(); // Tạo một ô mới (td)
+            const result = j * i;
+
+            // Định dạng chuỗi: "AxB=C" (ví dụ: "2x1=2")
+            cell.textContent = `${j}x${i}=${result}`;
+        }
+    }
+</script>
+
+</body>
+</html>
