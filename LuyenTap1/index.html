@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Vòng Lặp & Điều Kiện</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; }
+        .section { margin-bottom: 30px; padding: 15px; border: 1px solid #ccc; background-color: white; border-radius: 5px; }
+        h2 { color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px; }
+        .button-group { margin-top: 10px; }
+        button { padding: 10px 15px; font-size: 1em; margin-right: 10px; cursor: pointer; background-color: #28a745; color: white; border: none; border-radius: 4px; }
+        #fizzbuzz-output { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+        .fizz, .buzz, .fizzbuzz, .number { padding: 5px; border-radius: 3px; font-weight: bold; }
+        .fizz { background-color: #ffc107; }
+        .buzz { background-color: #17a2b8; color: white; }
+        .fizzbuzz { background-color: #dc3545; color: white; }
+        .number { background-color: #e9ecef; }
+        .note { color: #6c757d; margin-top: 15px; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<div class="section">
+    <h2>Bài 1, 3, 4, 5, 6: Kết quả trong Console (F12)</h2>
+    <p>Vui lòng mở Console để xem kết quả của các bài tập này.</p>
+</div>
+
+<div class="section">
+    <h2>Bài 2: Kiểm tra Nhiệt độ</h2>
+    <div class="button-group">
+        <button onclick="checkTemperature()">Kiểm tra nhiệt độ hiện tại</button>
+    </div>
+</div>
+
+<div class="section">
+    <h2>Bài 7: FizzBuzz (1-100)</h2>
+    <div id="fizzbuzz-output"></div>
+</div>
+
+<div class="section">
+    <h2>Bài 8: Game Đoán Số</h2>
+    <div class="button-group">
+        <button onclick="startGame()">Chơi Game Đoán Số</button>
+    </div>
+    <p id="game-status" class="note">Nhấn "Chơi Game Đoán Số" để bắt đầu.</p>
+</div>
+
+<script>
+    // --- Bài 1: Đếm từ 1 đến 100 và thông báo khi đến 99 ---
+    function countTo100() {
+        console.log("--- Bài 1: Đếm từ 1 đến 100 ---");
+        for (let i = 1; i <= 100; i++) {
+            console.log(`Đang đếm: ${i}`);
+            if (i === 99) {
+                alert("Bài 1: Đã hoàn thành đếm đến 99!");
+            }
+        }
+        console.log("Đã hoàn thành đếm đến 100.");
+    }
+    countTo100();
+
+
+    // --- Bài 2: Kiểm tra nhiệt độ ---
+    function checkTemperature() {
+        console.log("--- Bài 2: Kiểm tra nhiệt độ ---");
+        let tempInput = prompt("Nhập nhiệt độ hiện tại (°C):");
+        let temp = parseFloat(tempInput);
+
+        if (isNaN(temp)) {
+            alert("Vui lòng nhập một giá trị số hợp lệ.");
+            return;
+        }
+
+        if (temp > 100) {
+            alert("Nhiệt độ quá cao! Vui lòng giảm nhiệt độ.");
+        } else if (temp < 20) {
+            alert("Nhiệt độ quá thấp! Vui lòng tăng nhiệt độ.");
+        } else {
+            alert(`Nhiệt độ ${temp}°C là ổn định.`);
+        }
+    }
+
+
+    // --- Hàm chung tạo dãy Fibonacci ---
+    function generateFibonacci(count) {
+        let a = 0, b = 1;
+        let fib = [0, 1];
+
+        if (count === 0) return [];
+        if (count === 1) return [0];
+        if (count === 2) return fib;
+
+        for (let i = 2; i < count; i++) {
+            let next = a + b;
+            fib.push(next);
+            a = b;
+            b = next;
+        }
+        return fib;
+    }
+
+
+    // --- Bài 3: 20 số Fibonacci đầu tiên ---
+    function fibonacci20() {
+        console.log("--- Bài 3: 20 số Fibonacci đầu tiên ---");
+        const fib20 = generateFibonacci(20);
+        console.log(fib20);
+    }
+    fibonacci20();
+
+
+    // --- Bài 4: Tìm số Fibonacci đầu tiên chia hết cho 5 ---
+    function findFirstFibDivisibleBy5() {
+        console.log("--- Bài 4: Tìm số Fibonacci đầu tiên chia hết cho 5 ---");
+        let a = 0, b = 1;
+        // Bỏ qua 0 vì 0 chia hết cho mọi số
+        while (true) {
+            let next = a + b;
+            if (next > 0 && next % 5 === 0) {
+                console.log(`Số Fibonacci đầu tiên chia hết cho 5 là: ${next}`);
+                break;
+            }
+            a = b;
+            b = next;
+        }
+    }
+    findFirstFibDivisibleBy5();
+
+
+    // --- Bài 5: Tính tổng 20 số Fibonacci đầu tiên ---
+    function sumFibonacci20() {
+        console.log("--- Bài 5: Tổng 20 số Fibonacci đầu tiên ---");
+        const fib20 = generateFibonacci(20);
+        const sum = fib20.reduce((acc, curr) => acc + curr, 0);
+        console.log(`Tổng của 20 số Fibonacci đầu tiên là: ${sum}`);
+    }
+    sumFibonacci20();
+
+
+    // --- Bài 6: Tính tổng 30 số chia hết cho 7 đầu tiên ---
+    function sum30DivisibleBy7() {
+        console.log("--- Bài 6: Tổng 30 số chia hết cho 7 đầu tiên ---");
+        let count = 0;
+        let sum = 0;
+        let num = 7; // Số đầu tiên chia hết cho 7 (trong số tự nhiên > 0)
+
+        while (count < 30) {
+            sum += num;
+            num += 7; // Tăng lên 7 để đảm bảo số tiếp theo cũng chia hết cho 7
+            count++;
+        }
+        console.log(`Tổng của 30 số chia hết cho 7 đầu tiên là: ${sum}`);
+    }
+    sum30DivisibleBy7();
+
+
+    // --- Bài 7: FizzBuzz ---
+    function runFizzBuzz() {
+        console.log("--- Bài 7: FizzBuzz ---");
+        const outputDiv = document.getElementById('fizzbuzz-output');
+        outputDiv.innerHTML = ''; // Xóa nội dung cũ
+
+        for (let i = 1; i <= 100; i++) {
+            let output = "";
+            let className = "number";
+
+            if (i % 3 === 0 && i % 5 === 0) {
+                output = "FizzBuzz";
+                className = "fizzbuzz";
+            } else if (i % 3 === 0) {
+                output = "Fizz";
+                className = "fizz";
+            } else if (i % 5 === 0) {
+                output = "Buzz";
+                className = "buzz";
+            } else {
+                output = i;
+            }
+
+            const span = document.createElement('span');
+            span.textContent = output;
+            span.className = className;
+            outputDiv.appendChild(span);
+
+            // In ra console để kiểm tra
+            console.log(output);
+        }
+    }
+    runFizzBuzz();
+
+
+    // --- Bài 8: Game Đoán Số ---
+    let targetNumber = null;
+    let minRange = null;
+    let maxRange = null;
+    let guesses = 0;
+
+    function startGame() {
+        guesses = 0;
+        const gameStatus = document.getElementById('game-status');
+
+        // 1. Nhập khoảng đoán
+        while (true) {
+            const rangeInput = prompt("Bạn muốn đoán số trong khoảng nào?\n(Ví dụ: 1-100)");
+            if (!rangeInput) {
+                gameStatus.textContent = "Game bị hủy.";
+                return;
+            }
+
+            const parts = rangeInput.split('-').map(p => parseInt(p.trim()));
+
+            if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1]) && parts[0] < parts[1]) {
+                minRange = parts[0];
+                maxRange = parts[1];
+                break;
+            }
+            alert("Định dạng không hợp lệ. Vui lòng nhập định dạng 'Min-Max' (ví dụ: 1-100) và Min phải nhỏ hơn Max.");
+        }
+
+        // 2. Chọn số ngẫu nhiên
+        targetNumber = Math.floor(Math.random() * (maxRange - minRange + 1)) + minRange;
+        gameStatus.textContent = `Ứng dụng đã chọn một số ngẫu nhiên trong khoảng ${minRange} đến ${maxRange}. Bắt đầu đoán!`;
+
+        promptGuess();
+    }
+
+    function promptGuess() {
+        const gameStatus = document.getElementById('game-status');
+        while (true) {
+            const guessInput = prompt(`Đoán số của bạn (trong khoảng ${minRange} đến ${maxRange}):`);
+
+            if (guessInput === null) {
+                gameStatus.textContent = `Game kết thúc. Số bí mật là ${targetNumber}.`;
+                return; // Người dùng nhấn Hủy
+            }
+
+            const guess = parseInt(guessInput);
+
+            if (isNaN(guess) || guess < minRange || guess > maxRange) {
+                alert(`Vui lòng nhập một số hợp lệ trong khoảng ${minRange} đến ${maxRange}.`);
+                continue;
+            }
+
+            guesses++;
+
+            if (guess === targetNumber) {
+                gameStatus.textContent = `🎉 Chúc mừng! Bạn đã đoán đúng số ${targetNumber} sau ${guesses} lần đoán! Nhấn 'Chơi' để chơi lại.`;
+                alert(`CHÚC MỪNG! Bạn đã đoán đúng số ${targetNumber} sau ${guesses} lần đoán!`);
+                return; // Kết thúc lượt chơi
+            } else if (guess < targetNumber) {
+                alert(`Số bạn đoán (${guess}) bé hơn số bí mật. Hãy đoán lại.`);
+                gameStatus.textContent = `(Lần ${guesses}) Số ${guess} bé hơn số bí mật. Đoán lại!`;
+                // Cho phép người dùng nhập lại ngay lập tức
+            } else {
+                alert(`Số bạn đoán (${guess}) lớn hơn số bí mật. Hãy đoán lại.`);
+                gameStatus.textContent = `(Lần ${guesses}) Số ${guess} lớn hơn số bí mật. Đoán lại!`;
+                // Cho phép người dùng nhập lại ngay lập tức
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

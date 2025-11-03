@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20 Số Nguyên Tố Đầu Tiên</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { color: #007bff; }
+        #result {
+            border: 1px solid #ccc; padding: 15px; background-color: #f9f9f9;
+            font-size: 1.2em; line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<h1>20 Số Nguyên Tố Đầu Tiên</h1>
+<div id="result"></div>
+
+<script>
+    const NUM_PRIMES_NEEDED = 20;
+    let primes = [];
+    let num = 2; // Bắt đầu kiểm tra từ 2
+
+    /**
+     * Kiểm tra xem một số có phải là số nguyên tố hay không
+     * @param {number} n - Số cần kiểm tra.
+     * @returns {boolean} - true nếu là số nguyên tố, ngược lại là false.
+     */
+    function isPrime(n) {
+        if (n <= 1) return false;
+        // Chỉ cần kiểm tra đến căn bậc hai của n
+        for (let i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i === 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Vòng lặp tìm 20 số nguyên tố
+    while (primes.length < NUM_PRIMES_NEEDED) {
+        if (isPrime(num)) {
+            primes.push(num);
+        }
+        num++;
+    }
+
+    // Hiển thị kết quả ra trang web
+    const resultDiv = document.getElementById('result');
+    resultDiv.textContent = primes.join(', ');
+
+    console.log("20 Số Nguyên Tố Đầu Tiên:");
+    console.log(primes);
+</script>
+
+</body>
+</html>
